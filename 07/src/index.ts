@@ -1,5 +1,5 @@
 import { User } from "./User";
 import { Company } from "./Company";
-import {} from "googlemaps";
+import { CustomMap } from "./CustomMap";
 
-google;
+new CustomMap("map");
