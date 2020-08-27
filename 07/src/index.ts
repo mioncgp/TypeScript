@@ -1,6 +1,5 @@
 import { User } from "./User";
 import { Company } from "./Company";
+import {} from "googlemaps";
 
-const user = new User();
-
-console.log(user);
+google;
