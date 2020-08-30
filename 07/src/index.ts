@@ -3,6 +3,9 @@
 
 import { Sorted } from "./Sorter";
 import { NumbersCollection } from "./NumbersCollection";
+import { StringCollection } from "./StringCollection";
 
-const numbersCollection = new NumbersCollection([10, 3, -5, 0]);
-const sorted = new Sorted(numbersCollection);
+const st = new StringCollection("Xaayb");
+const sorted = new Sorted(st);
+sorted.sort();
+console.log(st.data);
