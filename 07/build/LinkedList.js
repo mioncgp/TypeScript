@@ -13,6 +13,7 @@ var LinkedList = /** @class */ (function () {
         this.head = null;
     }
     Object.defineProperty(LinkedList.prototype, "length", {
+        // get length of a linked list
         get: function () {
             if (!this.head) {
                 return 0;
@@ -28,6 +29,7 @@ var LinkedList = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    // add a node at the end of a linked list
     LinkedList.prototype.add = function (data) {
         var node = new NodeObj(data);
         if (!this.head) {
@@ -39,6 +41,47 @@ var LinkedList = /** @class */ (function () {
             tail = tail.next;
         }
         tail.next = node;
+    };
+    // return an item at given index
+    LinkedList.prototype.at = function (index) {
+        if (!this.head) {
+            throw new Error("Index out of bounds");
+        }
+        var counter = 0;
+        var node = this.head;
+        while (node) {
+            if (counter === index) {
+                return node;
+            }
+            counter++;
+            node = node.next;
+        }
+        throw new Error("Index out of bounds");
+    };
+    // compare the value of two given nodes
+    LinkedList.prototype.compare = function (leftIndex, rightIndex) {
+        if (this.head) {
+            throw new Error("List is empty");
+        }
+        return this.at(leftIndex).data > this.at(rightIndex).data;
+    };
+    // swap two cvalues of nodes
+    LinkedList.prototype.swap = function (leftIndex, rightIndex) {
+        var leftNode = this.at(leftIndex);
+        var rightNode = this.at(rightIndex);
+        var leftHand = leftNode.data;
+        leftNode.data = rightNode.data;
+        rightNode.data = leftHand;
+    };
+    LinkedList.prototype.print = function () {
+        if (!this.head) {
+            return;
+        }
+        var node = this.head;
+        while (node) {
+            console.log(node.data);
+            node = node.next;
+        }
     };
     return LinkedList;
 }());
