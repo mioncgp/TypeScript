@@ -1,10 +1,15 @@
+import { Sorted } from "./Sorter";
+
 class NodeObj {
   next: NodeObj | null = null;
   constructor(public data: number) {}
 }
 
-export class LinkedList {
+export class LinkedList extends Sorted {
   head: NodeObj | null = null;
+  constructor() {
+    super();
+  }
 
   // get length of a linked list
   get length(): number {
@@ -56,7 +61,7 @@ export class LinkedList {
 
   // compare the value of two given nodes
   compare(leftIndex: number, rightIndex: number) {
-    if (this.head) {
+    if (!this.head) {
       throw new Error("List is empty");
     }
     return this.at(leftIndex).data > this.at(rightIndex).data;
