@@ -1,11 +1,14 @@
 import { MatchReader } from "./MatchReader";
 import { MatchResults } from "./MatchResults";
+import { CSVfileReader } from "./CSVfileReader";
 
-const reader = new MatchReader("football.csv");
-reader.read();
+const csvFileReader = new CSVfileReader("football.csv");
+
+const matchReader = new MatchReader(csvFileReader);
+matchReader.load();
 
 let manUnitedWins = 0;
-reader.data.forEach((row) => {
+matchReader.matches.forEach((row) => {
   if (
     (row[1] === "Man United" && row[5] === MatchResults.HomeWin) ||
     (row[2] === "Man United" && row[5] === MatchResults.AwayWin)
@@ -14,4 +17,4 @@ reader.data.forEach((row) => {
   }
 });
 
-console.log(reader.data);
+console.log(manUnitedWins);
