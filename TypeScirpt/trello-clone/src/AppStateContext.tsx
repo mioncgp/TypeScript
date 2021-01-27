@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useContext } from "react";
 import { nanoid } from "nanoid";
-import { findItemIndexById } from "./arrayUtils";
+import { findItemIndexById, overrideItemAtIndex } from "./arrayUtils";
 type Action =
   | {
       type: "ADD_LIST";
@@ -66,16 +66,25 @@ const appStateReducer = (state: AppState, action: Action): AppState => {
       };
     }
     case "ADD_TASK": {
-      const targetLaneIndex = findItemIndexById(
+      const targetListIndex = findItemIndexById(
         state.lists,
         action.payload.listId
       );
-      state.lists[targetLaneIndex].tasks.push({
-        id: nanoid(),
-        text: action.payload.text,
-      });
+      const targetList = state.lists[targetListIndex];
+      const updatedTargetList = {
+        ...targetList,
+        tasks: [
+          ...targetList.tasks,
+          { id: nanoid(), text: action.payload.text },
+        ],
+      };
       return {
         ...state,
+        lists: overrideItemAtIndex(
+          state.lists,
+          updatedTargetList,
+          targetListIndex
+        ),
       };
     }
     default: {
